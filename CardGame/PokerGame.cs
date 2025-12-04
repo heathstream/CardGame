@@ -28,7 +28,6 @@ class PokerGame
             {
                 Console.Clear();
                 ReturnAllCards();
-                Deck.Restore();
             }
         }
     }
