@@ -75,8 +75,19 @@ class Hand : IComparable<Hand>
     {
         if (other?.Rank != Rank)
             return Rank.CompareTo(other?.Rank);
-        else
-            return Cards.Max()!.CompareTo(other?.Cards.Max());
+
+        var thisWinningCard = this.Cards.CountBy(c => c.Rank).MaxBy(c => c.Value).Key;
+        var otherWinningCard = other.Cards.CountBy(c => c.Rank).MaxBy(c => c.Value).Key;
+        if (thisWinningCard != otherWinningCard)
+            return thisWinningCard.CompareTo(otherWinningCard);
+
+        for (int i = 0; i < HAND_SIZE; i++)
+        {
+            if (Cards[i].Rank != other.Cards[i].Rank)
+                return Cards[i].Rank.CompareTo(other.Cards[i].Rank);
+        }
+
+        return Cards.Max()!.CompareTo(other.Cards.Max());
     }
 
     public override string ToString()

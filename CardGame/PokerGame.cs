@@ -34,6 +34,7 @@ class PokerGame
 
     public void DealCards(int number = Hand.HAND_SIZE)
     {
+        if (Hands == null || Hands.Count == 0) return;
         for (int i = 0; i < number; i++)
             foreach (var hand in Hands)
                 hand.AddCard(Deck.Deal());
@@ -41,6 +42,7 @@ class PokerGame
 
     public void ReturnAllCards()
     {
+        if (Hands == null || Hands.Count == 0) return;
         foreach (var player in Hands)
             player.Cards.Clear();
         Deck.Restore();

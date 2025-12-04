@@ -1,6 +1,7 @@
 class Deck
 {
     private Stack<Card> _cards = new();
+    private List<Card> _dealtCards = new();
     public int Count => _cards.Count;
 
     public Deck()
@@ -16,10 +17,11 @@ class Deck
 
     public void Restore()
     {
-        for (var suit = CardSuit.Clubs; suit < CardSuit.Spades; suit++)
-            for (var rank = CardRank.Two; rank < CardRank.Ace; rank++)
-                if (!_cards.Any(c => c.Suit == suit && c.Rank == rank))
-                    _cards.Push(new Card(suit, rank));
-        this.Shuffle();
+        foreach (var card in _dealtCards)
+        {
+            _dealtCards.Remove(card);
+            _cards.Push(card);
+        }
+        Shuffle();
     }
 }
