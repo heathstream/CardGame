@@ -26,8 +26,7 @@ class Card : IEquatable<Card>, IComparable<Card>
     {
         if (Rank != other?.Rank)
             return Rank.CompareTo(other?.Rank);
-        else
-            return Suit.CompareTo(other?.Suit);
+        else return 0;
     }
     #endregion
 }
