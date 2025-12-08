@@ -11,7 +11,12 @@ class Deck
                 _cards.Push(new Card(suit, rank));
     }
 
-    public Card Deal() => _cards.Pop();
+    public Card Deal()
+    {
+        Card card = _cards.Pop();
+        _dealtCards.Add(card);
+        return card;
+    }
 
     public void Shuffle() => _cards = new Stack<Card>(_cards.Shuffle());
 
@@ -19,9 +24,9 @@ class Deck
     {
         foreach (var card in _dealtCards)
         {
-            _dealtCards.Remove(card);
             _cards.Push(card);
         }
+        _dealtCards.Clear();
         Shuffle();
     }
 }
